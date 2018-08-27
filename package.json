@@ -7,7 +7,14 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build:client-and-server-bundles": "ng build --prod && ng run angu6-algolia:server:production",
+    "build:prerender": "npm run build:client-and-server-bundles && npm run compile:server && npm run generate:prerender",
+    "build:ssr": "npm run build:client-and-server-bundles && npm run compile:server",
+    "compile:server": "tsc -p server.tsconfig.json",
+    "generate:prerender": "cd dist && node prerender",
+    "serve:prerender": "cd dist/browser && http-server",
+    "serve:ssr": "node dist/server"
   },
   "private": true,
   "dependencies": {
@@ -19,8 +26,13 @@
     "@angular/http": "^6.1.0",
     "@angular/platform-browser": "^6.1.0",
     "@angular/platform-browser-dynamic": "^6.1.0",
+    "@angular/platform-server": "^6.1.0",
     "@angular/router": "^6.1.0",
+    "@nguniversal/express-engine": "^6.1.0",
+    "@nguniversal/module-map-ngfactory-loader": "^6.1.0",
+    "angular-instantsearch": "^2.0.3",
     "core-js": "^2.5.4",
+    "preboot": "^6.0.0-beta.5",
     "rxjs": "^6.0.0",
     "zone.js": "~0.8.26"
   },
@@ -40,7 +52,7 @@
     "karma-coverage-istanbul-reporter": "~2.0.0",
     "karma-jasmine": "~1.1.1",
     "karma-jasmine-html-reporter": "^0.2.2",
-    "protractor": "~5.3.0",
+    "protractor": "^5.4.0",
     "ts-node": "~5.0.1",
     "tslint": "~5.9.1",
     "typescript": "~2.7.2"
