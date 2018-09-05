@@ -30,7 +30,7 @@ export class AppComponent {
       searchParameters,
       indexName: "ikea",
       urlSync: true,
-      createAlgoliaClient: createSSRSearchClient({
+      searchClient: createSSRSearchClient({
         makeStateKey,
         HttpHeaders,
         transferState: this.transferState,
